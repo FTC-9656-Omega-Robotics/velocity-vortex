@@ -5,3 +5,5 @@ Please use this as reference for future projects, though existing code has been 
 
 Compile and deploy using Android Studio (a guide on how to properly set up Android Studio on macOS/Windows to do actual work will be published at a later time).
 Don't use javac of course.
+
+test nano test
