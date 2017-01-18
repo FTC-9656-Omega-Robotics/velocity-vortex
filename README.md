@@ -1,4 +1,4 @@
-Hi! This is the repo for Omega 2016-2017 software, namely OmegabotTeleOP and OmegabotAuto.
+Hi! This is the repo for Omega 2016-2017 software, namely OmegaBotTeleOP and OmegaBotAuto.
 
 Our personal code is stored in teamcode, whereas ftcrobotcontroller has vanilla code from FIRST.
 Please use this as reference for future projects, though existing code has been proven to have errors that may kill off motors.
