@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 public class OmegaBotTeleOP extends OpMode {
 
     public DcMotor leftDrive;        //before using a variable you have to declare it
-    public DcMotor rightDrive;
+    public DcMotor rightDrive; //Nidirena
     public DcMotor pickUp;
     public DcMotor fling;
     public DcMotor roll;
