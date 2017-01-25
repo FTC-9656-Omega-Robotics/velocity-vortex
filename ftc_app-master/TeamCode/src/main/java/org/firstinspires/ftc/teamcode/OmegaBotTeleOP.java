@@ -17,12 +17,12 @@ public class OmegaBotTeleOP extends OpMode {
     public DcMotor roll;
     public Servo capBall1;
     public Servo capBall2;
-    public int loadPos;//<--DCG
+    public int loadPos;
 
     public float leftY;        //float is a data type for decimals
     public float rightY;
 
-    public boolean isShooting = false;
+    public boolean isShooting = false; //Nidhir wrote this "lock" mechanic, so shouldn't he be responsible for motors burning out?
     public boolean isLoading = false; //your OG Nidhir Guggila wrote this code respect this man
 
     @Override
