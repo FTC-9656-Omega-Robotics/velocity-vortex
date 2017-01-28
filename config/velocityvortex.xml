@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<Robot type="FirstInspires-FTC">
+    <MotorController name="Motor Controller 2" serialNumber="AL00VGD5">
+        <Motor name="roll" port="1" />
+    </MotorController>
+    <LegacyModuleController name="Legacy Module 1" serialNumber="AL00XQKE">
+        <MotorController name="Catapult and pickUp" port="0">
+            <Motor name="catapult" port="1" />
+            <Motor name="pickUp" port="2" />
+        </MotorController>
+    </LegacyModuleController>
+    <ServoController name="Servo Controller 4" serialNumber="AL00VKHG">
+        <Servo name="leftCapBall" port="1" />
+        <Servo name="rightCapBall" port="6" />
+    </ServoController>
+    <MotorController name="Motor Controller 3" serialNumber="AL00UXSU">
+        <Motor name="left_drive" port="1" />
+        <Motor name="right_drive" port="2" />
+    </MotorController>
+</Robot>
