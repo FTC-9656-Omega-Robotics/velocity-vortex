@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 public class OmegaBotTeleOP extends OpMode {
 
     public DcMotor leftDrive;        //before using a variable you have to declare it
-    public DcMotor rightDrive; //Nidirena
+    public DcMotor rightDrive;
     public DcMotor pickUp;
     public DcMotor fling;
     public DcMotor roll;
@@ -65,14 +65,13 @@ public class OmegaBotTeleOP extends OpMode {
 
         //capball:
         if (gamepad2.left_stick_y < 0) {
-                capBall1.setPosition(0.9);
-                capBall2.setPosition(0.1);
-            }
-            else if (gamepad2.left_stick_y > 0){
+            capBall1.setPosition(0.9);
+            capBall2.setPosition(0.1);
+        } else if (gamepad2.left_stick_y > 0) {
 
-                capBall1.setPosition(0.1);
-                capBall2.setPosition(0.9);
-            }
+            capBall1.setPosition(0.1);
+            capBall2.setPosition(0.9);
+        }
 
 
 
@@ -106,30 +105,24 @@ public class OmegaBotTeleOP extends OpMode {
                 loadPos += 1249;
                 telemetry.addData("Load Position", loadPos);
             } else {
-                if (Math.abs(fling.getCurrentPosition() - fling.getTargetPosition()) < 5) {
-                    isShooting = false;
-                    fling.setPower(0);
-                }
+
             }
-            // fling.setPower(0.5);
-        } else {
+            if (gamepad2.b) {
+                if (!isLoading) {
+                    isLoading = true;
+                    fling.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    fling.setTargetPosition(loadPos + 189);
+                    fling.setPower(0.5);
+                    loadPos += 189; //originally 191
+                    //loadPos += 1440; // 1440 special units = 360 degrees
+                    telemetry.addData("Load Position", loadPos);
+                } else {
+                    if (Math.abs(fling.getCurrentPosition() - fling.getTargetPosition()) < 5) { //originally 5
+                        isLoading = false;
+                        fling.setPower(0);
+                    }
 
-        }
-        if (gamepad2.b) {
-            if (!isLoading) {
-                isLoading = true;
-                fling.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                fling.setTargetPosition(loadPos + 189);
-                fling.setPower(0.5);
-                loadPos += 189; //originally 191
-                //loadPos += 1440; // 1440 special units = 360 degrees
-                telemetry.addData("Load Position", loadPos);
-            } else {
-                if (Math.abs(fling.getCurrentPosition() - fling.getTargetPosition()) < 5) { //originally 5
-                    isLoading = false;
-                    fling.setPower(0);
                 }
-
             }
         }
     }
