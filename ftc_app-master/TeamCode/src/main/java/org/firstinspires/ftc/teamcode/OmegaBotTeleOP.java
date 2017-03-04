@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-@TeleOp(name="OmegabotTeleop", group="VelocityVortex")
+@TeleOp(name="OmegaBotTeleop", group="VelocityVortex")
 //@Disabled
 public class OmegaBotTeleOP extends OpMode {
 
