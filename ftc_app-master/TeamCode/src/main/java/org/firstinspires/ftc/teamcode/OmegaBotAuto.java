@@ -38,7 +38,6 @@ public class OmegaBotAuto extends LinearOpMode {
         rightDrive = hardwareMap.dcMotor.get("right_drive");
         rightDrive.setDirection(DcMotor.Direction.REVERSE);
         fling = hardwareMap.dcMotor.get("catapult");
-        fling.setDirection(DcMotor.Direction.REVERSE);
         loadPos = fling.getCurrentPosition();
 
         waitForStart();
@@ -53,20 +52,10 @@ public class OmegaBotAuto extends LinearOpMode {
 
         runtime.reset();
         if (opModeIsActive() && (runtime.seconds() < 2) && (!isShooting)) {
-            //if (!isShooting) {
                 fling.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                 fling.setTargetPosition(loadPos + 1440);
-                fling.setPower(-0.05);
+                fling.setPower(0.05);
                 isShooting = true;
-            //    fling.setPower(0);
-            /* if (Math.abs(fling.getCurrentPosition() - fling.getTargetPosition()) < 5) {
-                fling.setPower(0);
-            }
-            */
-          //  }
-          /*  if (isShooting) {
-                fling.setPower(0);
-            } */
         }
         if (isShooting) {
             fling.setPower(0);
