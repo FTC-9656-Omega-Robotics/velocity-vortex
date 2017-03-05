@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -29,13 +30,13 @@ public class OmegaBotTeleOP extends OpMode {
     public void init() {
         leftDrive = hardwareMap.dcMotor.get("left_drive");        //called left_drive in the config file
         leftDrive.setDirection(DcMotor.Direction.REVERSE); //prob will disable
-
         rightDrive = hardwareMap.dcMotor.get("right_drive");
+
         pickUp = hardwareMap.dcMotor.get("pickUp");
         roll = hardwareMap.dcMotor.get("roll");
 
         fling = hardwareMap.dcMotor.get("catapult");
-        fling.setDirection(DcMotor.Direction.FORWARD);
+        fling.setDirection(DcMotor.Direction.REVERSE);
         fling.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         loadPos = fling.getCurrentPosition();
@@ -95,35 +96,39 @@ public class OmegaBotTeleOP extends OpMode {
 
         //   boolean isShooting=false; wtf lol
         if (gamepad2.a) {
-            if (!isShooting) {
+            /* if (!isShooting) {
                 isShooting = true;
                 // fling.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
                 // fling.setPower(0.75);
                 fling.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                fling.setTargetPosition(loadPos + 1249);
+                fling.setTargetPosition(loadPos + 1249); */
                 fling.setPower(0.5);
-                loadPos += 1249;
+                loadPos += fling.getCurrentPosition();
                 telemetry.addData("Load Position", loadPos);
-            } else {
+        } else {
+            fling.setPower(0);
 
-            }
-            if (gamepad2.b) {
-                if (!isLoading) {
-                    isLoading = true;
-                    fling.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                    fling.setTargetPosition(loadPos + 189);
-                    fling.setPower(0.5);
-                    loadPos += 189; //originally 191
-                    //loadPos += 1440; // 1440 special units = 360 degrees
-                    telemetry.addData("Load Position", loadPos);
-                } else {
-                    if (Math.abs(fling.getCurrentPosition() - fling.getTargetPosition()) < 5) { //originally 5
-                        isLoading = false;
-                        fling.setPower(0);
-                    }
-
+                /* if (Math.abs(fling.getCurrentPosition() - fling.getTargetPosition()) < 5) { //originally 5// isLoading = false;
+                    fling.setPower(0);
                 }
             }
+        }
+        if (gamepad2.b) {
+            if (!isLoading) {
+                isLoading = true;
+                fling.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                fling.setTargetPosition(loadPos + 189);
+                fling.setPower(0.5);
+                loadPos += 189; //originally 191
+                //loadPos += 1440; // 1440 special units = 360 degrees
+                telemetry.addData("Load Position", loadPos);
+            } else {
+                if (Math.abs(fling.getCurrentPosition() - fling.getTargetPosition()) < 5) { //originally 5
+                    isLoading = false;
+                    fling.setPower(0);
+                }
+
+            } */
         }
     }
 }
