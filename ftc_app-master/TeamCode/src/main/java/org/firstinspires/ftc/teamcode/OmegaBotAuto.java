@@ -1,5 +1,4 @@
-// package com.qualcomm.ftcrobotcontroller.opmodes; //ignore the red yo
-package org.firstinspires.ftc.teamcode; //revert to top if needed
+package com.qualcomm.ftcrobotcontroller.opmodes; //ignore the red yo
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -14,15 +13,17 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 //@Disable
 public class OmegaBotAuto extends LinearOpMode {
 
-
+    //declare variables
     private DcMotor leftDrive;
     private DcMotor rightDrive;
     private DcMotor pickUp;
     private DcMotor roll;
     private DcMotor fling;
+    private Servo capBall1;
+    private Servo capBall2;
 
     public int loadPos;
-    public boolean isShooting = false;
+    //public boolean isShooting = false;
 
     private ElapsedTime     runtime = new ElapsedTime();
 
@@ -30,20 +31,23 @@ public class OmegaBotAuto extends LinearOpMode {
 
     @Override
     public void runOpMode() {
-
         leftDrive = hardwareMap.dcMotor.get("left_drive");
         rightDrive = hardwareMap.dcMotor.get("right_drive");
         rightDrive.setDirection(DcMotor.Direction.REVERSE);
 
         pickUp = hardwareMap.dcMotor.get("pickUp");
         roll = hardwareMap.dcMotor.get("roll");
+        roll.setDirection(DcMotor.Direction.REVERSE);
 
         fling = hardwareMap.dcMotor.get("catapult");
-        fling.setDirection(DcMotor.Direction.FORWARD);
+        fling.setDirection(DcMotor.Direction.REVERSE);
         fling.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         loadPos = fling.getCurrentPosition();
         telemetry.addData("Load Position", loadPos);
+        capBall1 = hardwareMap.servo.get("leftCapBall");
+        capBall2 = hardwareMap.servo.get("rightCapBall");
+
 
 
         waitForStart();
@@ -52,25 +56,30 @@ public class OmegaBotAuto extends LinearOpMode {
         while (opModeIsActive() && (runtime.seconds() < 1.5)) {
             leftDrive.setPower(1);
             rightDrive.setPower(1);
-            roll.setPower(-1);
-            pickUp.setPower(1);
         }
         leftDrive.setPower(0);
         rightDrive.setPower(0);
-
         runtime.reset();
-        if (opModeIsActive() && (runtime.seconds() < 2) && (!isShooting)) {
-                fling.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                fling.setTargetPosition(loadPos + 1440);
-                fling.setPower(0.05);
-                isShooting = true;
+        while (opModeIsActive() && (runtime.seconds() < 0.6)) {
+            rightDrive.setPower(1);
         }
-        if (isShooting) {
-            fling.setPower(0);
-        }
-
+        leftDrive.setPower(0);
+        rightDrive.setPower(0);
         runtime.reset();
-        while (opModeIsActive() && (runtime.seconds() < 1)) { //5-8 seconds
+        while (opModeIsActive() && (runtime.seconds() < 1.3)) { //mod1
+            leftDrive.setPower(1);
+            rightDrive.setPower(1);
+        }
+        leftDrive.setPower(0);
+        rightDrive.setPower(0);
+        runtime.reset();
+        while (opModeIsActive() && (runtime.seconds() < 0.9)) { //5-8 seconds
+            leftDrive.setPower(1);
+        }
+        leftDrive.setPower(0);
+        rightDrive.setPower(0);
+        runtime.reset();
+        while (opModeIsActive() && (runtime.seconds() < 1)) {
             leftDrive.setPower(1);
             rightDrive.setPower(1);
         }
